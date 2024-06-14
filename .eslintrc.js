@@ -1,38 +1,45 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true
+    es6: true,
   },
   extends: [
-    "plugin:@typescript-eslint/recommended",
-    "airbnb-typescript",
-    "plugin:react-hooks/recommended"
+    'plugin:@typescript-eslint/recommended',
+    'airbnb-typescript',
+    'plugin:react-hooks/recommended',
   ],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
-      modules: true
+      modules: true,
     },
-    project: "./tsconfig.json"
+    project: './tsconfig.json',
   },
   plugins: ['@typescript-eslint'],
   settings: {
     react: {
-      pragma: 'h'
-    }
+      pragma: 'h',
+    },
   },
-  ignorePatterns: ["**/*.mjs"],
+  ignorePatterns: [
+    '**/*.mjs',
+    'webpack.config.base.js',
+    'webpack.config.build.js',
+    'webpack.config.dev.js',
+    'babel.config.js',
+    '.eslintrc.js'
+  ],
   rules: {
-    'indent': ['error', 2, { SwitchCase: 1 }],
+    indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'windows'],
-    'quotes': ['error', 'single'],
-    'semi': 0,
+    quotes: ['error', 'single'],
+    semi: 0,
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-use-before-define': 0,
     'import/prefer-default-export': 0,
@@ -75,9 +82,9 @@ module.exports = {
     'no-restricted-syntax': 0,
     'operator-assignment': 0,
     '@typescript-eslint/quotes': 0,
-    'quotes': 0,
+    quotes: 0,
     '@typescript-eslint/indent': 0,
-    'indent': 0,
+    indent: 0,
     'comma-dangle': 0,
     'object-shorthand': 0,
     'object-property-newline': 0,
@@ -93,6 +100,6 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'import/extensions': 0,
     '@typescript-eslint/semi': 0,
-    '@typescript-eslint/no-throw-literal': 0
-  }
+    '@typescript-eslint/no-throw-literal': 0,
+  },
 }

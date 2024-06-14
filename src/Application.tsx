@@ -1,4 +1,4 @@
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, Spin } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import {
   HashRouter,
@@ -16,6 +16,11 @@ import store from './store'
 class Application {
   static container: HTMLElement = document.querySelector('#app') as HTMLElement
 
+  static AuthRoute({ children }: any): ReactNode {
+    
+    return children
+  }
+
   static recursionRoute(
     route: Application.AppRoute,
     index: number,
@@ -25,11 +30,10 @@ class Application {
         key={index}
         path={route.path}
         element={
-          <Suspense fallback={<h2>加载中...</h2>}>
+          <Suspense fallback={<Spin />}>
             <route.element />
           </Suspense>
         }
-        loader={route?.loader}
       >
         {route?.children?.length &&
           route.children.map((item, index1) =>
@@ -43,7 +47,18 @@ class Application {
     return (
       <StrictMode>
         <Provider store={store}>
-          <ConfigProvider locale={zhCN}>
+          <ConfigProvider locale={zhCN} theme={{
+            components: {
+              Button: {
+                defaultBg: "#7052ff",
+                defaultColor: "#fff",
+                defaultHoverBg: "#8671EC",
+                defaultHoverColor: "#fff",
+                defaultHoverBorderColor: "#8671EC",
+                defaultActiveBorderColor: "#8671EC",
+              },
+            },
+          }}>
             <HashRouter basename="/">
               <Routes>
                 {router.map((item: Application.AppRoute, index: number) =>

@@ -1,10 +1,24 @@
+
 declare namespace Application {
   type AppRoute = {
     path: string
     element?: ReactNode
-    lazyFlag: boolean,
-    lazy?: LazyRouteFunction<RouteObject>,
     children?: AppRoute[]
-    loader?: AgnosticNonIndexRouteObject["loader"]
+    isAuth?: boolean
+  }
+
+  type MenuType = {
+    url: string
+    name: string
+  }
+
+  type ReducerType = {
+    counter: Reducer<State>
+  }
+
+  type ReduxProps = {
+    value: number
+    increment: Function
+    decrement: Function
   }
 }

@@ -1,14 +1,16 @@
 
 import React, { Component, PureComponent } from 'react';
 import { h } from '../..';
+import { connectToRedux } from '../connectToRedux';
 
-export default class Home extends PureComponent {
-
+class TeamPool extends PureComponent {
   render() {
     return (
       <div>
-        首页
+        1
       </div>
     );
   }
 }
+
+export default connectToRedux(TeamPool)

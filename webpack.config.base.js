@@ -1,7 +1,7 @@
-const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const { NODE_ENV } = process.env;
+const { NODE_ENV } = process.env
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
-  }, 
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.less', '.css'],
   },
@@ -49,19 +49,16 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [
-          NODE_ENV !== "production" ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        type: "asset",
         use: [
           {
             loader: 'url-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: 'static/', // 输出到指定目录
+              limit: 4096, // 小于4kb将编码成base64
             },
           },
         ],
@@ -80,4 +77,4 @@ module.exports = {
       },
     ],
   },
-};
+}

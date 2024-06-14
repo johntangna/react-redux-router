@@ -5,7 +5,7 @@ export default class Login extends PureComponent {
   render() {
     return (
       <div>
-        1
+        登录
       </div>
     );
   }

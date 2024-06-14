@@ -1,55 +1,49 @@
-import { ReactNode, lazy, Suspense } from "react";
-import { LazyRouteFunction, RouteObject, createBrowserRouter, createHashRouter } from "react-router-dom";
+import { lazy } from "react";
+import { redirect, redirectDocument, useNavigate, Link } from "react-router-dom";
 import Layout from "../pages/layout";
-import { getToken } from "../utils/auth";
+import { getToken } from "../utils/cookie";
 import Login from "../pages/login";
 
 const Home = lazy(() => import("../pages/home"))
-const BlackList = lazy(() => import('../pages/blackList'))
-const MyProvider = lazy(() => import('../pages/myProvider'))
-
-const loader = () => {
-  const isAuth = getToken();
-  if (!isAuth) {
-    throw new Response('', {
-      status: 302,
-      headers: {
-        Location: '/login',
-      },
-    });
-  }
-  return null;
-};
+const TeamPool = lazy(() => import('../pages/TeamPool'))
+const Important = lazy(() => import('../pages/Important'))
+const TraceRecord = lazy(() => import('../pages/TraceRecord'))
+const Contact = lazy(() => import('../pages/Contact'))
 
 export const router: Application.AppRoute[] =
   [
     {
       path: "/",
       element: Layout,
-      lazyFlag: false,
       children: [
         {
-          path: "/home",
-          lazyFlag: true,
+          path: "home",
           element: Home,
         },
         {
-          path: "myProvider",
-          lazyFlag: true,
-          element: MyProvider,
-          loader: loader,
+          path: "important",
+          element: Important,
+          isAuth: true,
         },
         {
-          path: "blackList",
-          lazyFlag: true,
-          element: BlackList,
-          loader: loader,
+          path: "teamPool",
+          element: TeamPool,
+          isAuth: true,
+        },
+        {
+          path: "traceRecord",
+          element: TraceRecord,
+          isAuth: true,
+        },
+        {
+          path: "contact",
+          element: Contact,
+          isAuth: true,
         },
       ],
     },
     {
       path: '/login',
       element: Login,
-      lazyFlag: false,
     },
   ]
